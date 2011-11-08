@@ -1,0 +1,21 @@
+#imagenJuego{
+	width:35%;
+	height:100px;
+	border:solid black 1px;
+	margin:0 auto;
+	margin-top:200px;
+}
+
+#datos{
+	margin:0 auto;
+	padding: 40px;
+	width:35%;
+	border:solid black 1px;
+}
+
+#jugador{
+	width:50px;
+	height:50px;
+	border:solid black 1px;
+	font-size:50px;
+}
