@@ -13,9 +13,19 @@
 	border:solid black 1px;
 }
 
+#mapa{
+	position: relative;
+	width:100%;
+	height:450px;
+	border:solid black 1px;
+}
+
 #jugador{
 	width:50px;
 	height:50px;
 	border:solid black 1px;
 	font-size:50px;
+	margin-left:0px;
+	   position: absolute;
+    z-index: 10;
 }
