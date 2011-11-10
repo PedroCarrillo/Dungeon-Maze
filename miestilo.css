@@ -1,3 +1,5 @@
+
+
 #imagenJuego{
 	width:35%;
 	height:100px;
@@ -14,10 +16,19 @@
 }
 
 #mapa{
+	background-image:url('imagenMapaNivel1.jpg');
 	position: relative;
-	width:100%;
+	width:1264px;
 	height:450px;
 	border:solid black 1px;
+}
+
+#pared1{
+	width:1264px;
+	height:70px;
+	
+	border:solid blue 1px;
+
 }
 
 #jugador{
