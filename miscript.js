@@ -1,32 +1,40 @@
 // mover jugador
 	
-	var x1=0;
-	var y1=0;
+	var xJugador=0;
+	var yJugador=0;
+
+	
+	$(document).ready(function(){	
+
+	});
+	
+	$(document).keypress(function(e) {
+		
+		if (e.which == 115) {
+			//DOWN - S
+			yJugador = yJugador + 5;
+			if (yJugador > 398) yJugador = 398;
+			$("#jugador").css({ "top": yJugador + "px"});
+		  
+		}
+		if (e.which == 119) {
+			//UP - W
+			yJugador = yJugador - 5;
+			if (yJugador < 0) yJugador = 0;
+			$("#jugador").css({ "top": yJugador + "px"});
+		}
+		if (e.which == 100) {
+			//RIGHT - D
+			xJugador = xJugador + 5;
+			if (xJugador > 1212) xJugador = 1212;        
+			$("#jugador").css({ "left": xJugador + "px"});
+		}
+		if (e.which == 97) {
+			//LEFT - A
+			xJugador = xJugador - 5;
+			if (xJugador < 0) xJugador = 0;
+			$("#jugador").css({ "left": xJugador + "px"});
+		}
 		
 
-		
-	function moverJugador(direccion)
-		{	
-			switch(direccion.keyCode)
-			{
-				case 38:
-					y1-=5;
-					document.getElementById("jugador").style.top=String(y1)+"px";
-				break;
-				case 39:
-					x1-=5;
-					document.getElementById("jugador").style.right=String(x1)+"px";
-				break;
-				case 40:
-					y1+=5;
-					document.getElementById("jugador").style.top=String(y1)+"px";
-				break;
-				case 37:
-					x1+=5;
-					document.getElementById("jugador").style.right=String(x1)+"px";
-				break;
-				
-			}
-			
-	};
-
+	});
