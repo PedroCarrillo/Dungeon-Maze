@@ -7,26 +7,66 @@
 
 </head>
 <body>
+
+	<div id="mapa">
+		<div class="wall" id="pared1"></div>
+		<img src="enemigo.jpg" id="enemigo1" alt="puntito"/>
+		<img src="punto.jpg" id="jugador"  alt="enemigo"/>
+	</div>
+	<div id="zonaDados">
+		<canvas id="canvas" width="400" height="300">
+		No HTML5 for you
+		</canvas>
+		<button id="lanzarDados" onClick ="throwdice();">Lanza los dados</button>
+	</div>
+
 <div id="imagenJuego">
 </div>
+
+<form id="inicioDatos" name="inicioDatos"  method="post">
 <div id="datos">
-	<form action="http://www.google.com" method="post">
 
-	<label for="nick">Choose your nickname</label><input type="text" name="nick" id="nick" /><span class="alerta">Introduzca un nickname</span> <br />
-	
-	<input type="radio" name="clase" value="guerrero" id="guerrero_elegido" /> <label for="guerrero_elegido">Guerrero</label><br/>
-	
-	<input type="radio" name="clase" value="clerigo" id="clerigo_elegido" /> <label for="clerigo_elegido">Clerigó</label><br/>
-	
-	<input type="radio" name="clase" value="valkiria" id="valkiria_elegido" /> <label for="valkiria_elegido">Valkiria</label><br/>
-    
-	<span class="alerta" id="alerta_tipo">Eliga una clase</span><br />
-	
-	<input type="button" name="empezar" value="Empezar" type="submit" href="nivel1.html" />
+	<div id="nickname">
 
-    
-	</form>     
-</div>
+		<label for="nick">Choose your nickname: </label><input type="text" name="nick" id="nick" /><span class="alerta">Introduzca un nickname</span> <br />
+	
+	</div>
+	
+	<div id="clases" >
+	
+		<input type="radio" name="clase" value="guerrero" id="guerrero_elegido" /> <label for="guerrero_elegido">Guerrero</label><br/>
+		
+		<input type="radio" name="clase" value="clerigo" id="clerigo_elegido" /> <label for="clerigo_elegido">Clerigó</label><br/>
+		
+		<input type="radio" name="clase" value="valkiria" id="valkiria_elegido" /> <label for="valkiria_elegido">Valkiria</label><br/>
+		
+		<span class="alerta" id="alerta_tipo">Eliga una clase</span><br />
+
+	</div>
+	
+	<div id="personajeDatos">
+		<div id="mAttack">
+		</div>
+		<div id="mDefense">
+		</div>
+		<div id="mHealth">
+		</div>
+		<div id="mDamage">
+		</div>
+	</div>
+	
+	<div id="imagenClase">
+		
+	</div>
+	
+	<div id="boton">
+		
+		<input id="boton1" name="empezar" value="Empezar" type="submit"/>
+
+	</div>
+</div>    
+</form>     
+
 
 </body>
 </html>
