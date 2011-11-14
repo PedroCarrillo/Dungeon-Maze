@@ -1,12 +1,89 @@
+
+
+$(document).ready(function(){
+		var clase=$("input[name=clase]:checked").val(); 
+		$("#boton1").click(function() {
+			
+			if(validarCampo("#nick") & validarCampoAlerta("input[name=clase]:checked","#alerta_tipo")
+			){collectParams();}
+			return false;
+
+		});
+		
+		$("#guerrero_elegido").click(function(){
+			$("#mAttack").text("Attack: 10");
+			$("#mDefense").text("Defense: 14");
+			$("#mDamage").text("Damage: 15");
+			$("#mHealth").text("Health: 100");
+		});
+		
+		$("#clerigo_elegido").click(function(){
+			$("#mAttack").text("Attack: 5");
+			$("#mDefense").text("Defense: 16");
+			$("#mDamage").text("Damage: 5");
+			$("#mHealth").text("Health: 150");
+		});
+		
+		
+		$("#valkiria_elegido").click(function(){
+			$("#mAttack").text("Attack: 10");
+			$("#mDefense").text("Defense: 12");
+			$("#mDamage").text("Damage: 20");
+			$("#mHealth").text("Health: 50");
+		});
+			
+
+	
+		 $("#enemigo1").css({"top":yEnemigo1+"px"});
+		 $("#enemigo1").css({"left":yEnemigo1+"px"});
+		 movimientoEnemigo1();
+});
+
+//inicio
+	function mostrarDatosPersonajes(){
+		if(clase="guerrero"){
+			$("#mAttack").text("Attack: 10");
+		}
+	}
+	
+	function collectParams(){
+		var nick=document.inicioDatos.nick.value;
+		var clase=$("input[name=clase]:checked").val(); 
+		$("#datos").hide("fast");
+		$("#mapa").show("slow");
+		$("#zonaDados").fadeIn();
+
+	}
+	
+	function validarCampo(input_id) {
+			if ($(input_id).val() == "" || $(input_id).val() == undefined) {
+					$(input_id).next().show();
+					return false;
+			}
+			else {
+					$(input_id).next().hide();
+					return true;
+			}
+	};
+	
+	function validarCampoAlerta(input_id, alerta_id) {
+			if ($(input_id).val() == "" || $(input_id).val() == undefined) {
+					$(alerta_id).show();
+					return false;
+			}
+			else {
+					$(alerta_id).hide();
+					return true;
+			}
+	};
+
+
+
 // mover jugador
 	
 	var xJugador=0;
-	var yJugador=0;
+	var yJugador=200;
 
-	
-	$(document).ready(function(){	
-
-	});
 	
 	$(document).keypress(function(e) {
 		
@@ -39,6 +116,27 @@
 
 	});
 	
+	//Enemigo 1 
+	
+	var xEnemigo1=30;
+	var yEnemigo1=130;
+	var vidaEnemigo1=40;
+	
+	function movimientoEnemigo1(){
+		
+			yEnemigo1=yEnemigo1+5;
+			if(yEnemigo1>190){
+				yEnemigo1=yEnemigo1-5;
+				$("#enemigo1").css({"top":yEnemigo1+"px"});
+			}
+			if(yEnemigo1<130){
+				yEnemigo1=yEnemigo1+5;
+				$("#enemigo1").css({"top":yEnemigo1+"px"});
+			}
+			$("#enemigo1").css({"top":yEnemigo1+"px"});
+
+	}
+	
 	//DADOS 
 	
 	var cwidth=400;
@@ -66,55 +164,7 @@
 		sum += ch;
 		drawface(ch);
 		
-		if(firstturn){
-		
-			var bank=Number(document.f.bank.value);
-			if(bank<10){
-				alert("No tienes dinero! No puedes jugar.");
-				return;
-			}
-			bank=bank-10;
-			document.f.bank.value=String(bank);
-				switch(sum){
-					case 7:
-					case 11:
-						document.f.outcome.value="Ganaste!";
-						bank=Number(document.f.bank.value);
-						bank += 20;
-						document.f.bank.value = String(bank);
-						break;
-					case 2:
-					case 3:
-					case 12:
-						document.f.outcome.value="Perdiste";
-						break;
-					default:
-						point=sum;
-						document.f.pv.value=point;
-						firstturn=false;
-						document.f.stage.value="Lance nuevamente.";
-						document.f.outcome.value="   ";
-				}
-		}else{
-			switch(sum){
-				case point:
-					document.f.outcome.value="Ganaste!";
-					bank=Number(document.f.bank.value);
-						bank += 20;
-						document.f.bank.value= String(bank);
-					document.f.stage.value="Juega nuevamente.";
-					document.f.pv.value="  ";
-					firstturn=true;
-					break;
-				
-				case 7:
-					document.f.outcome.vale="Perdiste!";
-					document.f.stage.value="Reinicia el juego";
-					document.f.pv.value="   ";
-					firstturn=true;
 
-			}
-	}
 	
 	function draw1(){
 		var dotx;
