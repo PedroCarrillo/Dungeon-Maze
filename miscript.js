@@ -1,7 +1,14 @@
-
+var nick="";
+var attack = 0;
+var defense = 0;
+var health = 0;
+var damage = 0;
+var muerte=false;
+var interval_id = setInterval(function() { movimientoEnemigo1(); },300);
 
 $(document).ready(function(){
 		var clase=$("input[name=clase]:checked").val(); 
+		movimientoEnemigo1();
 		$("#boton1").click(function() {
 			
 			if(validarCampo("#nick") & validarCampoAlerta("input[name=clase]:checked","#alerta_tipo")
@@ -11,50 +18,62 @@ $(document).ready(function(){
 		});
 		
 		$("#guerrero_elegido").click(function(){
-			$("#mAttack").text("Attack: 10");
-			$("#mDefense").text("Defense: 14");
-			$("#mDamage").text("Damage: 15");
-			$("#mHealth").text("Health: 100");
+			attack = 10;
+			defense = 14;
+			damage = 15;
+			health = 100;
+			$("#mAttack").text("Attack: "+attack);
+			$("#mDefense").text("Defense: "+defense);
+			$("#mDamage").text("Damage: "+damage);
+			$("#mHealth").text("Health: "+health);
 		});
 		
 		$("#clerigo_elegido").click(function(){
-			$("#mAttack").text("Attack: 5");
-			$("#mDefense").text("Defense: 16");
-			$("#mDamage").text("Damage: 5");
-			$("#mHealth").text("Health: 150");
+			attack = 5;
+			defense = 16;
+			damage = 5;
+			health = 150;
+			$("#mAttack").text("Attack: "+attack);
+			$("#mDefense").text("Defense: "+defense);
+			$("#mDamage").text("Damage: "+damage);
+			$("#mHealth").text("Health: "+health);
 		});
 		
 		
 		$("#valkiria_elegido").click(function(){
-			$("#mAttack").text("Attack: 10");
-			$("#mDefense").text("Defense: 12");
-			$("#mDamage").text("Damage: 20");
-			$("#mHealth").text("Health: 50");
+			attack = 10;
+			defense = 12;
+			damage = 20;
+			health = 50;
+			$("#mAttack").text("Attack: "+attack);
+			$("#mDefense").text("Defense: "+defense);
+			$("#mDamage").text("Damage: "+damage);
+			$("#mHealth").text("Health: "+health);
 		});
 			
-
-	
-		 $("#enemigo1").css({"top":yEnemigo1+"px"});
-		 $("#enemigo1").css({"left":yEnemigo1+"px"});
 		 movimientoEnemigo1();
 });
 
 //inicio
-	function mostrarDatosPersonajes(){
-		if(clase="guerrero"){
-			$("#mAttack").text("Attack: 10");
-		}
-	}
-	
+
 	function collectParams(){
-		var nick=document.inicioDatos.nick.value;
+		nick=document.inicioDatos.nick.value;
 		var clase=$("input[name=clase]:checked").val(); 
 		$("#datos").hide("fast");
 		$("#mapa").show("slow");
+		$("#tablero").show("slow");
 		$("#zonaDados").fadeIn();
-
+		mostrarDatos();
 	}
 	
+	function mostrarDatos(){
+		$("#jugadorNick").text(nick);
+		$("#jugadorVida").text("health: "+health);
+		$("#jugadorAtaque").text("Attack: "+attack);
+		$('#jugadorDaño').text("Damage: "+damage);
+		$('#jugadorDefensa').text("Defense: "+defense);
+	
+	}
 	function validarCampo(input_id) {
 			if ($(input_id).val() == "" || $(input_id).val() == undefined) {
 					$(input_id).next().show();
@@ -117,25 +136,40 @@ $(document).ready(function(){
 	});
 	
 	//Enemigo 1 
+	var ataqueGoblin=5;
+	var defensaGoblin=10;
+	var vidaGoblin=10;
+	var dañoGoblin=5;
+	
+	var ataqueOgro=10;
+	var defensaOgro=12;
+	var vidaOgro=20;
+	var dañoOgro=10;
 	
 	var xEnemigo1=30;
 	var yEnemigo1=130;
 	var vidaEnemigo1=40;
 	
 	function movimientoEnemigo1(){
-		
+		if(yEnemigo1<300){
 			yEnemigo1=yEnemigo1+5;
-			if(yEnemigo1>190){
-				yEnemigo1=yEnemigo1-5;
-				$("#enemigo1").css({"top":yEnemigo1+"px"});
-			}
-			if(yEnemigo1<130){
-				yEnemigo1=yEnemigo1+5;
-				$("#enemigo1").css({"top":yEnemigo1+"px"});
-			}
 			$("#enemigo1").css({"top":yEnemigo1+"px"});
+		}else{
+			movimientoEnemigo2();
+		}
 
 	}
+	
+	function movimientoEnemigo2(){
+		if(yEnemigo1>130){
+			yEnemigo1=yEnemigo1-5;
+			$("#enemigo1").css({"top":yEnemigo1+"px"});
+		}else{
+			movimientoEnemigo1();
+		}
+
+	}
+	
 	
 	//DADOS 
 	
@@ -236,7 +270,7 @@ $(document).ready(function(){
 		ctx.strokeRect(dx,dy,dicewidth,diceheight);
 		var dotx;
 		var doty;
-		ctx.fillStyle="#009966";
+		ctx.fillStyle="#FFFFFF";
 			switch(n){
 				case 1:
 					draw1();

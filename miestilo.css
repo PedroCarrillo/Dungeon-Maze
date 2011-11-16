@@ -6,7 +6,6 @@ body {
 	font-family:"Arial";
 	font-weight:bold;
     color:#fff;
-
 	}
 	
 
@@ -39,6 +38,7 @@ input[type=text]{
 }
 
 #zonaDados{
+	background-color:#646C89;
 	width:350px;
 	height:300px;
 	border:solid green 1px;
@@ -117,18 +117,18 @@ input[type=text]{
 	height:450px;
 	border:solid red 1px;
 	display:none;
-	margin-left:60px;
+	margin-left:150px;
 }
 
 .wall{position:absolute;
-	background: #04f; 
+
 }
 
 #pared1{
 	margin:0;
 	width:50px;
 	height:50px;
-	border:solid red 5px;
+	border:solid red 1px;
 }
 
 #jugador{
@@ -143,10 +143,54 @@ input[type=text]{
     z-index: 1;
 }
 
+#tablero{
+	width:150px;
+	height:170px;
+	display:none;
+	float:left;
+	border:solid white 1px;
+	text-align:center;
+	font-size:12px;
+}
+	
+#jugadorNick{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorVida{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorAtaque{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorDaño{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+#jugadorDefensa{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
 #enemigo1{
-	top:130px;
-	left:30px;
+	top:200px;
+	left:130px;
 	width:50px;
 	height:50px;
-	border:solid black 1px;
+	border:solid yellow 1px;
+	position: absolute;
+	z-index: 1;
 }
