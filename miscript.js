@@ -4,11 +4,17 @@ var defense = 0;
 var health = 0;
 var damage = 0;
 var muerte=false;
-var interval_id = setInterval(function() { movimientoEnemigo1(); },300);
+
+var xEnemigo1=130;
+var yEnemigo1=130;
+
+var xEnemigo2=90;
+var yEnemigo2=630;
+
 
 $(document).ready(function(){
 		var clase=$("input[name=clase]:checked").val(); 
-		movimientoEnemigo1();
+		
 		$("#boton1").click(function() {
 			
 			if(validarCampo("#nick") & validarCampoAlerta("input[name=clase]:checked","#alerta_tipo")
@@ -51,7 +57,7 @@ $(document).ready(function(){
 			$("#mHealth").text("Health: "+health);
 		});
 			
-		 movimientoEnemigo1();
+
 });
 
 //inicio
@@ -102,36 +108,49 @@ $(document).ready(function(){
 	
 	var xJugador=0;
 	var yJugador=200;
-
+	var derecha=false;
 	
 	$(document).keypress(function(e) {
-		
+
 		if (e.which == 115) {
 			//DOWN - S
 			yJugador = yJugador + 5;
 			if (yJugador > 398) yJugador = 398;
 			$("#jugador").css({ "top": yJugador + "px"});
-		  
+			//			alert(xEnemigo1,yEnemigo1);
+			/*movimientoEnemigo1(xEnemigo1,yEnemigo1);*/
+		
 		}
 		if (e.which == 119) {
 			//UP - W
 			yJugador = yJugador - 5;
 			if (yJugador < 0) yJugador = 0;
 			$("#jugador").css({ "top": yJugador + "px"});
+				//		alert(xEnemigo1,yEnemigo1);
+			//movimientoEnemigo1(xEnemigo1,yEnemigo1);
+			
 		}
 		if (e.which == 100) {
 			//RIGHT - D
 			xJugador = xJugador + 5;
 			if (xJugador > 1212) xJugador = 1212;        
 			$("#jugador").css({ "left": xJugador + "px"});
+			//alert(xEnemigo1,yEnemigo1)
+
+			//movimientoEnemigo1(xEnemigo1,yEnemigo1);
+		
 		}
 		if (e.which == 97) {
 			//LEFT - A
 			xJugador = xJugador - 5;
 			if (xJugador < 0) xJugador = 0;
 			$("#jugador").css({ "left": xJugador + "px"});
+			//alert(xEnemigo1,yEnemigo1)
+			
+			
 		}
-		
+		movimientoEnemigo1(xEnemigo1,yEnemigo1);
+		colision(xEnemigo1,yEnemigo1);
 
 	});
 	
@@ -146,29 +165,92 @@ $(document).ready(function(){
 	var vidaOgro=20;
 	var dañoOgro=10;
 	
-	var xEnemigo1=30;
-	var yEnemigo1=130;
+
 	var vidaEnemigo1=40;
+	var movementE=false;
+	function setxEnemigo1(x){xEnemigo1=x;}
+	function setyEnemigo1(y){yEnemigo1=y;}
 	
-	function movimientoEnemigo1(){
-		if(yEnemigo1<300){
-			yEnemigo1=yEnemigo1+5;
-			$("#enemigo1").css({"top":yEnemigo1+"px"});
+	function movimientoEnemigo1(x,y){
+		if(Math.sqrt(Math.pow((x-xJugador),2))>Math.sqrt(Math.pow((y-yJugador),2))){
+			if((x-xJugador)>0){
+				x=x-5;	
+				
+			}else {
+				x=x+5;
+			}
+			setxEnemigo1(x);
+			
+				$("#enemigo1").css({"top":yEnemigo1+"px"});
+				$("#enemigo1").css({"left":xEnemigo1+"px"});
 		}else{
-			movimientoEnemigo2();
+			if((y-yJugador)>0){
+				y=y-5;	
+			}else {
+				y=y+5;
+			}
+			setyEnemigo1(y);
+			
+				$("#enemigo1").css({"top":yEnemigo1+"px"});
+				$("#enemigo1").css({"left":xEnemigo1+"px"});		
 		}
-
 	}
 	
-	function movimientoEnemigo2(){
-		if(yEnemigo1>130){
-			yEnemigo1=yEnemigo1-5;
-			$("#enemigo1").css({"top":yEnemigo1+"px"});
+	function colision(x,y){
+		if((xJugador==(x+50))&((y>=yJugador-50)&(y<=yJugador+50))){
+			alert("Chocaste");
 		}else{
-			movimientoEnemigo1();
+			if(((xJugador+50)==x)&((y>=yJugador-50)&(y<=yJugador+50))){
+			alert("Chocaste");
+			}else{
+				if(((yJugador+50)==y)&((x>=xJugador-50)&(x<=xJugador+50))){
+				alert("Chocaste");
+				}else{
+					if(((yJugador-50)==y)&((x>=xJugador-50)&(x<=xJugador+50))){
+						alert("Chocaste");
+					}
+				}
+			}
 		}
-
+		
 	}
+		
+
+
+	
+	
+		
+		
+		/*if(!movementE){
+			if(y!=yJugador){
+				y=y+5;
+				x=x+5;
+				setxEnemigo1(x);
+				setyEnemigo1(y);
+				$("#enemigo1").css({"top":yEnemigo1+"px"});
+				$("#enemigo1").css({"left":xEnemigo1+"px"});
+			}else{
+				x=x-5;
+				setxEnemigo1(x);
+				movementE=true;
+				$("#enemigo1").css({"left":xEnemigo1+"px"});
+				$("#enemigo1").css({"top":yEnemigo1+"px"});
+			}
+			if(x==xJugador){
+				y=y+5;
+				x=x-5;
+				setxEnemigo1(x);
+				setyEnemigo1(y);
+				$("#enemigo1").css({"top":yEnemigo1+"px"});
+				$("#enemigo1").css({"left":xEnemigo1+"px"});
+			}
+		}else{
+			y=yJugador;
+			setyEnemigo1(y);
+			$("#enemigo1").css({"top":yEnemigo1+"px"});
+
+		}*/
+	
 	
 	
 	//DADOS 
