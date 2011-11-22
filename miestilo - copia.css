@@ -1,0 +1,206 @@
+
+body {
+	background:#000;
+	width:894px;
+	height:550px;
+	font-family:"Arial";
+	font-weight:bold;
+    color:#fff;
+	}
+	
+
+input[type=radio]{
+	margin:10px;
+}
+
+
+input[type=text]{
+	margin-left:50px;
+}
+
+#imagenJuego{
+	width:35%;
+	height:100px;
+	border:solid white 1px;
+	margin-left:550px;
+	margin-top:150px;
+}
+
+#nickname{
+	border:solid white 1px;
+	
+}
+
+#boton{
+	margin-top:190px;
+	border:solid white 1px;
+	text-align:center;
+}
+
+#zonaDados{
+	background-color:#646C89;
+	width:350px;
+	height:300px;
+	border:solid green 1px;
+	text-align:center;
+	display:none;
+}
+
+#lanzarDados{
+	margin-top:-40px;
+}
+
+#clases{
+	margin-left:50px;
+	margin-top:30px;
+	border:solid white 1px;
+	float:left;
+}
+
+#imagenClase{
+	margin-top:30px;
+	margin-right:50px;
+	border:solid white 1px;
+	width:150px;
+	height:120px;
+	float:right;
+}
+
+#datos{
+	margin-left:400px;
+	padding: 40px;
+	width:60%;
+	height:250px;
+	border:solid white 1px;
+}
+
+#personajeDatos{
+
+	float:left;
+	border:solid blue 1px;
+	width:110px;
+	height:120px;
+	font-size:12px;
+	margin-top:30px;
+	margin-left:50px;
+}
+
+#mAttack{
+	height:15px;
+	margin:10px;
+}
+#mDefense{
+	height:15px;
+	margin:10px;
+}
+#mHealth{
+	height:15px;
+	margin:10px;
+}
+#mDamage{
+	height:15px;
+	margin:10px;
+}
+
+.alerta 
+{
+	font-size:12px;
+    color: red;
+    display: none;
+}
+
+
+#mapa{
+	background-image:url('imagenMapaNivel1.jpg');
+	position: relative;
+	width:1264px;
+	height:450px;
+	border:solid red 1px;
+	display:none;
+	margin-left:150px;
+}
+
+.wall{position:absolute;
+
+}
+
+#pared1{
+	margin:0;
+	width:50px;
+	height:50px;
+	border:solid red 1px;
+}
+
+#jugador{
+	top:200px;
+	left:0px;
+	width:50px;
+	height:50px;
+	border:solid black 1px;
+	font-size:50px;
+	margin-left:0px;
+	position: absolute;
+    z-index: 1;
+}
+
+#tablero{
+	width:150px;
+	height:170px;
+	display:none;
+	float:left;
+	border:solid white 1px;
+	text-align:center;
+	font-size:12px;
+}
+	
+#jugadorNick{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorVida{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorAtaque{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorDaño{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+#jugadorDefensa{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+#enemigo1{
+	top:130px;
+	left:130px;
+	width:50px;
+	height:50px;
+	border:solid red 1px;
+	position: absolute;
+	z-index: 1;
+}
+
+#enemigo2{
+	top:90px;
+	left:630px;
+	width:50px;
+	height:50px;
+	border:solid yellow 1px;
+	position: absolute;
+	z-index: 1;
+}

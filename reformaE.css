@@ -1,0 +1,21 @@
+#canvasDados{
+	 width:400px;
+	height:300px;
+	border:solid green 1px;
+}
+
+#mapa{
+	margin-right: 50px;
+}
+
+ #canvasMapa{
+	border:solid black 1px;
+ }
+ 
+ #a{width:100px;height:50px; border:solid black 1px; float:right;}
+ #noticias{width:200px;height:200px; border:solid black 1px; float:right;}
+ #datosEnemigos{width:200px;height:200px; border:solid black 1px; float:right;}
+ #zonaDados{ float:left;
+ }
+ 
+ 

@@ -1,0 +1,652 @@
+    $(document).ready(function(){
+		$("#lanzarDados").attr("disabled", "disabled");
+		$("#lanzarDados").click(function(){
+			var e=encontrarAtacante();
+			ataqueJugadorT(e);
+			if(enemigos[e].vida <=0){
+				borrarEnemigo(e);
+				var a="";
+				for(var i=0;i<enemigos.length;i++){
+					a=a+enemigos[i].vida;
+				}
+				alert(a);	
+				col=false;
+				$("#lanzarDados").attr("disabled", "disabled");
+			}else{
+				ataqueEnemigo(e);
+			}
+		});
+	});
+	
+	var nick="";
+	var mapax = 0;
+    var mapay = 0;
+    var mapWidth = 1000;
+    var mapHeight = 400;
+    var radioP = 20;
+    var mapaLimRight =  mapWidth + mapax -radioP;
+    var mapaLimBot = mapHeight + mapay - radioP;
+    var mapaLimLeft = mapax + radioP;
+    var mapaLimTop = mapay + radioP;
+    var playerX;
+    var playerY;
+    var ctx;
+	var enemigos=[];
+	var objetos=[];
+    var img = new Image();
+    img.src="punto.jpg";
+	var imgPendejo= new Image();
+	imgPendejo.src="puntito.jpg";
+	var imgOrco=new Image();
+	imgOrco.src="orco.jpg";
+	var imgWall= new Image();
+	imgWall.src="wall.jpg";
+	var imgKey=new Image();
+	imgKey.src="key.jpg";
+	var imgCoin=new Image();
+	imgCoin.src="coin.png";
+	var imgPuerta= new Image();
+	imgPuerta="key.jpg";
+	
+	var nivelT=false;
+	var j;
+	var jota;
+	var col=false;
+	var posE=[];
+	var captura=99;
+	var atacante;
+	//Orco
+	
+	function Orco(){
+		this.posX=0;
+		this.posY=0;
+		this.ataque=10;
+		this.defensa=12;
+		this.vida=20;
+		this.daño=10;
+		this.draw=dibujarOrco;
+		this.draw2=dibujarOrco2;
+		this.tipo="orco";
+	}
+	
+	function dibujarOrco(){
+		for(j=0;j<enemigos.length;j++){
+			var resultado= false
+			while(resultado==false){
+				this.posX=generarAbcisas()+radioP;
+				this.posY=generarOrdenadas()+radioP;
+				if((compruebaPosicion(this.posX,this.posY)==true)&(compruebaParedes_nivel1(this.posX,this.posY)==true)){
+					resultado=true;
+				}
+			}
+		}
+		ctx.drawImage(imgOrco,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+	}
+	
+	function dibujarOrco2(){
+		ctx.drawImage(imgOrco,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+	}
+	
+	var orco1=new Orco(100,200);
+	
+	//Goblin
+	
+	function getPosEnemigoX(i){
+		return enemigos[i].posX;
+	}
+
+	
+	function Goblin(){
+		this.posX=0;
+		this.posY=0;
+		this.ataque=5;
+		this.defensa=10;
+		this.vida=10;
+		this.daño=5;
+		this.draw=dibujarGoblin3;
+		this.draw2=dibujarGoblin2;
+		this.tipo="goblin";
+	}
+	
+	function dibujarGoblin3(){	
+		for(j=0;j<enemigos.length;j++){
+			var resultado= false
+			while(resultado==false){
+				this.posX=generarAbcisas()+radioP;
+				this.posY=generarOrdenadas()+radioP;
+				if((compruebaPosicion(this.posX,this.posY)==true)&(compruebaParedes_nivel1(this.posX,this.posY)==true)){
+					resultado=true;
+				}
+			}
+		}
+		ctx.drawImage(img,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+	}
+			
+	function getVidaE(i){
+		return enemigos[i].vida;
+	}
+	
+	function setVidaE(i,t){
+		enemigos[i].vida=t;
+	}
+	
+	function getPosXE(i){
+		return enemigos[i].posX;
+	}
+	
+	function setPosXE(i,t){
+		enemigos[i].posX=t;
+	}
+	
+	function getPosYE(i){
+		return enemigos[i].posY;
+	}
+	
+	function setPosYE(i,t){
+		enemigos[i].posY=t;
+	}
+			
+	var goblin1=new Goblin();
+	var goblin2=new Goblin();
+	var goblin3=new Goblin();
+	
+	
+
+	enemigos[0]=orco1;
+	enemigos[1]=goblin1;
+	enemigos[2]=goblin2;
+	enemigos[3]=goblin3;
+
+	
+	function Moneda(){
+		this.cantidad=10;
+		this.valor=1;
+		this.draw=dibujarMoneda;
+		this.draw2=dibujarMoneda2;
+		this.tipo="moneda";
+	}
+	
+	function dibujarMoneda(){
+		for(j=0;j<enemigos.length;j++){
+			var resultado= false
+			while(resultado==false){
+				this.posX=generarAbcisas()+radioP;
+				this.posY=generarOrdenadas()+radioP;
+				if((compruebaPosicion(this.posX,this.posY)==true)&(compruebaParedes_nivel1(this.posX,this.posY)==true)){
+					resultado=true;
+				}
+			}
+		}
+		if(this.valor>0){
+			ctx.drawImage(imgCoin,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+		}
+	}
+	
+	function dibujarMoneda2(){
+		if(this.valor>0){
+			ctx.drawImage(imgCoin,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+		}
+	}
+	
+	function key(posX,posY){
+		this.posX=posX;
+		this.posY=posY;
+		this.draw=drawKey;
+		this.draw2=drawKey;
+		this.valor=1;
+		this.tipo="key";
+	}
+	function drawKey(){
+		if(this.valor>0){
+			ctx.drawImage(imgKey,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+		}
+	}
+	function door(){
+		this.posX=500;
+		this.posY=20;
+		this.draw=drawPuertita_bonita;
+		this.draw2=drawPuertita_bonita;
+		this.valor=0;
+		this.tipo="door";
+	}
+	function drawPuertita_bonita(){
+		if(this.valor>0){
+			ctx.drawImage(imgPuerta,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+		}
+	}	
+			
+	
+	var moneda1=new Moneda();
+	var nkey=new key(60,100);
+	var moneda2=new Moneda();
+	var moneda3=new Moneda();
+	var moneda4=new Moneda();
+	var puertita=new door();
+	objetos.push(nkey);
+	objetos.push(moneda1);
+	objetos.push(moneda2);
+	objetos.push(moneda3);
+	objetos.push(moneda4);
+	objetos.push(puertita);
+	
+	function drawallstart(){
+		ctx.clearRect(0,0,mapWidth,mapHeight);
+		var m;
+		
+		drawKey();
+		for(m=0;m<enemigos.length;m++){
+			enemigos[m].draw();
+		}		
+		for(m=0;m<objetos.length;m++){
+			objetos[m].draw();
+		}
+		
+	}
+	
+	function cogerObjeto(){
+		var d;
+		var ñ;
+		for(ñ=0;ñ<objetos.length;ñ++){
+			d=Math.sqrt(Math.pow((objetos[0].posX-playerX),2)+Math.pow(objetos[ñ].posY-playerY,2));
+			
+			
+				if(playerX==objetos[ñ].posX & playerY==objetos[ñ].posY){
+					if(objetos[ñ].tipo=="key"){
+						for(ñ=0;ñ<objetos.length;ñ++){
+							if(objetos[ñ].tipo=="door"){
+								objetos[ñ].valor=1;
+							}
+						}
+					}
+					objetos[ñ].valor=0;
+				}
+			$('#noticias').text(d);
+		}
+	}
+	
+	function drawall(){
+		ctx.clearRect(0,0,mapWidth,mapHeight);
+		paredes_nivel_1();
+		drawKey();
+		
+		var m;
+		for(m=0;m<enemigos.length;m++){
+			enemigos[m].draw2();
+		}
+		for(m=0;m<objetos.length;m++){
+			objetos[m].draw2();
+		}
+		if(nivelT){
+			
+		}
+	}
+    //jugador
+	
+	var ataqueJugador=10;
+	var defensaJugador=0;
+	var dañoJugador=15;
+	var vidaJugador=100;
+	
+	function init(){
+		ctx = document.getElementById('canvasMapa').getContext('2d');
+		movePlayer();
+		drawallstart();
+		dibujaPlayer(0+radioP,380);
+		paredes_nivel_1();
+		
+     }
+	
+	function dibujaPlayer(x,y){
+		
+		ctx.drawImage(imgPendejo,x-radioP,y-radioP,2*radioP,2*radioP);
+		playerX=x;
+		playerY=y;
+	}
+	
+	function paredes_nivel_1(){
+
+			
+			ctx.drawImage(imgWall,180-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,220-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,260-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,300-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,340-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,380-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,420-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,460-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,500-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,540-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,580-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,620-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,660-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,700-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,740-radioP,220-radioP,2*radioP,2*radioP);
+			ctx.drawImage(imgWall,780-radioP,220-radioP,2*radioP,2*radioP);
+		}
+	
+	function compruebaPosicion(x,y){
+		if(x==playerX&y==playerY){
+			return false;
+		}else{
+			var uv;
+			for(uv=0;uv<=enemigos.length;uv++){
+				if(x==enemigos[uv]&y==enemigos[uv]){
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+	
+	function compruebaParedes_nivel1(x,y){
+		if((x==140||x==820)&(y>=100&y<=300)){
+			return false;
+		}else{
+			if(y==220&(x>=180&x<=780)){
+				return false;
+			}else{
+				return true;
+			}
+		}		
+	}
+	
+
+	
+	function generarAbcisas(){
+		var a=Math.round(Math.random()*24);
+			a=a-(a%1);
+			a=a*40;
+		return a;
+	}
+	
+	function generarOrdenadas(){
+		var b=Math.round(Math.random()*9);
+			b=b-(b%1);
+			b=b*40;
+		return b;
+	}
+	
+
+	
+	function movePlayer(){
+			$(document).keypress(function(e) {
+				$("#a").text(col);
+				if(!col){
+					if (e.which == 115) {
+					//DOWN - S
+					ctx.clearRect(playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+					playerY = playerY + 40;
+					if (playerY > 380){ 
+						playerY = 380;
+					}
+					// alert(xEnemigo1,yEnemigo1);
+					/*movimientoEnemigo1(xEnemigo1,yEnemigo1);*/
+
+					}
+					if (e.which == 119) {
+					ctx.clearRect(playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+					//UP - W
+					playerY = playerY - 40;
+					if (playerY < 20){ 
+						playerY = 20;
+					}
+					// alert(xEnemigo1,yEnemigo1);
+					//movimientoEnemigo1(xEnemigo1,yEnemigo1);
+
+					}
+					if (e.which == 100) {
+					ctx.clearRect(playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+					//RIGHT - D
+					playerX = playerX + 40;
+					if (playerX > 980){
+						playerX = 980;
+					}
+					//alert(xEnemigo1,yEnemigo1)
+
+					//movimientoEnemigo1(xEnemigo1,yEnemigo1);
+					}
+					if (e.which == 97) {
+					ctx.clearRect(playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+					//LEFT - A
+					playerX = playerX - 40;
+					if (playerX < 20){
+						playerX = 20;}
+					}
+					colision();
+					movimientoEnemigo();
+					colision();
+					$("#a").text(col);
+					cogerObjeto();
+					ctx.drawImage(imgPendejo,playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+					if(col){
+					$("#lanzarDados").attr("disabled", false);}
+				}
+				
+			});
+	 }
+	 	function dibujarGoblin2(){
+			ctx.drawImage(img,this.posX-radioP,this.posY-radioP,2*radioP,2*radioP);
+		}
+
+
+	function movimientoEnemigo(){
+		for(k=0;k<enemigos.length;k++){
+			x=enemigos[k].posX;
+			y=enemigos[k].posY;
+			ctx.clearRect(x-radioP,y-radioP,2*radioP,2*radioP);
+			if(Math.sqrt(Math.pow((x-playerX),2))>Math.sqrt(Math.pow((y-playerY),2))){
+				if((x-playerX)>0){
+					x=x-40;
+				}else {
+					x=x+40;
+				}
+			}if(Math.sqrt(Math.pow((x-playerX),2))<Math.sqrt(Math.pow((y-playerY),2))){
+				if((y-playerY)>0){
+					y=y-40;
+				}else {
+					y=y+40;
+				}
+			}
+			enemigos[k].posX=x;
+			enemigos[k].posY=y;
+			drawall();
+
+
+		}
+
+		
+		
+}
+
+
+function colision(){
+	jota=0;
+	while(!col && jota<enemigos.length ){
+		if(getPosXE(jota) == playerX && getPosYE(jota) == playerY){
+			col=true;
+		}
+		jota++;
+		
+	}
+
+}
+
+// colision enemigo
+
+// DADOS
+
+	var cwidth=400;
+	var cheight=300;
+	var dicex=50;
+	var dicey=50;
+	var dicewidth=100;
+	var diceheight=100;
+	var dotrad=6;
+	var ctd;
+	var dx=100;
+	var dy=100;
+	var firstturn=true;
+	var point;
+	var numberCh;
+
+	function throwdice(){
+		var sum;
+		var ch=1+Math.floor(Math.random()*6);
+		sum=ch;
+		dx=dicex;
+		dy=dicey;
+		drawface(ch);
+		dx=(dicex+150);
+		ch=1+Math.floor(Math.random()*6);
+		sum += ch;
+		numberCh=sum;
+		drawface(ch);
+		
+
+	
+	function draw1(){
+		var dotx;
+		var doty;
+		ctd.beginPath();
+		dotx=dx+.5*dicewidth;
+		doty=dy+.5*diceheight;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		ctd.closePath();
+		ctd.fill();
+	}
+	
+	function draw2(){
+		var dotx;
+		var doty;
+		ctd.beginPath();
+		dotx=dx+3*dotrad;
+		doty=dy+3*dotrad;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		dotx=dx+dicewidth-3*dotrad;
+		doty=dy+diceheight-3*dotrad;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		ctd.closePath();
+		ctd.fill();
+	}
+	
+	function draw4(){
+		var dotx;
+		var doty;
+		ctd.beginPath();
+		dotx=dx+3*dotrad;
+		doty=dy+3*dotrad;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		dotx=dx+dicewidth-3*dotrad;
+		doty=dy+diceheight-3*dotrad;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		ctd.closePath();
+		ctd.fill();
+		ctd.beginPath();
+		
+		dotx=dx+3*dotrad;
+		doty=dy+diceheight-3*dotrad;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		dotx=dx+dicewidth-3*dotrad;
+		doty=dy+3*dotrad;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		ctd.closePath();
+		ctd.fill();
+	}
+	
+	function draw2mid(){
+		var dotx;
+		var doty;
+		ctd.beginPath();
+		dotx=dx+3*dotrad;
+		doty=dy+.5*diceheight;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		dotx=dx+dicewidth-3*dotrad;
+		doty=dy+.5*diceheight;
+		ctd.arc(dotx,doty,dotrad,0,Math.PI*2,true);
+		ctd.closePath();
+		ctd.fill();
+	}
+	
+	function drawface(n){
+		ctd=document.getElementById('canvasDados').getContext('2d');
+		ctd.lineWidth=5;
+		ctd.clearRect(dx,dy,dicewidth,diceheight);
+		ctd.strokeRect(dx,dy,dicewidth,diceheight);
+		var dotx;
+		var doty;
+		ctd.fillStyle="#0";
+			switch(n){
+				case 1:
+					draw1();
+					break;
+				case 2:
+					draw2();
+					break;
+				case 3:
+					draw2();
+					draw1();
+					break;
+				case 4:
+					draw4();
+					break;
+				case 5:
+					draw4();
+					draw1();
+					break;
+				case 6:
+					draw4();
+					draw2mid();
+					break
+			}
+			
+			}
+	}
+	
+	function encontrarAtacante(){
+		atacante=0;
+		for(variable=0;variable<enemigos.length;variable++){
+			if(enemigos[variable].posX == playerX && enemigos[variable].posY == playerY){
+				atacante=variable;
+			}
+		}
+		return atacante;
+	}
+	
+	function borrarEnemigo(borrar){
+		enemigos.splice(borrar,1);
+	}
+	
+	function borrarObjeto(borrar){
+		objeto.splice(borrar,1);
+	}
+	
+	
+
+	
+	function ataqueJugadorT(par){
+		throwdice();
+		var golpe=0;
+		var before=numberCh+ataqueJugador;
+		if(before > enemigos[par].defensa){
+			golpe=dañoJugador;
+		}else{
+			golpe=0;
+		}
+		enemigos[par].vida=enemigos[par].vida-golpe;
+		$("#noticias").text(getVidaE(par));
+	}
+	
+	function ataqueEnemigo(par){
+		throwdice();
+		var golpe;
+		var before=numberCh+enemigos[par].ataque;
+		if(before > defensaJugador){
+			golpe=enemigos[par].daño;
+		}else{
+			golpe=0;
+		}
+		vidaJugador=vidaJugador-golpe;
+
+	}
+	
+	

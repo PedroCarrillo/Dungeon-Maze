@@ -1,0 +1,90 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head>
+    <link href="reformaE.css" rel="stylesheet" type="text/css"/>
+    <script src="jquery-1.6.4.js" type="text/javascript"></script>
+    <script src="reformascript.js" type="text/javascript"></script>
+
+</head>
+<body onload="init();">
+	<div id="tablero">
+		<div id="jugadorNick"></div>
+		<div id="jugadorVida"></div>
+		<div id="jugadorAtaque"></div>
+		<div id="jugadorDaño"></div>
+		<div id="jugadorDefensa"></div>
+
+	</div>
+	<div id="mapa">
+		<canvas id="canvasMapa" width="1000px" height="400px">
+		 you cant play :c
+		</canvas>
+		
+	</div>
+
+	<div id="zonaDados">
+		<canvas id="canvasDados" width="400" height="300">
+		No HTML5 for you
+		</canvas>
+		<button name="lanzarDados" id="lanzarDados" >Lanza los dados</button>
+	</div>
+	
+	<div id="imagenJuego">
+</div>
+
+<form id="inicioDatos" name="inicioDatos"  method="post">
+<div id="datos">
+
+	<div id="nickname">
+
+		<label for="nick">Choose your nickname: </label><input type="text" name="nick" id="nick" /><span class="alerta">Introduzca un nickname</span> <br />
+	
+	</div>
+	
+	<div id="clases" >
+	
+		<input type="radio" name="clase" value="guerrero" id="guerrero_elegido" /> <label for="guerrero_elegido">Guerrero</label><br/>
+		
+		<input type="radio" name="clase" value="clerigo" id="clerigo_elegido" /> <label for="clerigo_elegido">Clerigó</label><br/>
+		
+		<input type="radio" name="clase" value="valkiria" id="valkiria_elegido" /> <label for="valkiria_elegido">Valkiria</label><br/>
+		
+		<span class="alerta" id="alerta_tipo">Eliga una clase</span><br />
+
+	</div>
+	
+	<div id="personajeDatos">
+		<div id="mAttack">
+		</div>
+		<div id="mDefense">
+		</div>
+		<div id="mHealth">
+		</div>
+		<div id="mDamage">
+		</div>
+	</div>
+	
+	<div id="imagenClase">
+		
+	</div>
+	
+	<div id="boton">
+		
+		<input id="boton1" name="empezar" value="Empezar" type="submit"/>
+
+	</div>
+</div>    
+</form>     
+	<div id="a">
+	</div>
+	<div id="datosEnemigos">
+	</div>
+	<div id="noticias">
+	
+	</div>
+  
+</form>     
+
+
+</body>
+</html>
