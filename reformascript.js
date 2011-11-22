@@ -108,8 +108,8 @@ function mostrarDatos(){
 	$("#jugadorAtaque").text("Attack: "+ataqueJugador);
 	$('#jugadorDaño').text("Damage: "+dañoJugador);
 	$('#jugadorDefensa').text("Defense: "+defensaJugador);
-
-
+	$('#monedaCant').text(": "+scoreJugador);
+	$('#eventos').text("Empieza la batalla >D"); 
 }
 
 function mostrarDatosEnemigos(f){
@@ -120,6 +120,7 @@ function mostrarDatosEnemigos(f){
 	$("#eAtaque").text("Attack: "+ataqueJugador);
 	$('#eDaño').text("Damage: "+dañoJugador);
 	$('#eDefensa').text("Defense: "+defensaJugador);
+	$('#eventos').text("Encontraste un "+enemigos[f].tipo); 
 	
 }
 
@@ -285,7 +286,6 @@ function validarCampoAlerta(input_id, alerta_id) {
 	var goblin1=new Goblin();
 	var goblin2=new Goblin();
 	var goblin3=new Goblin();
-	var goblin4;
 	
 
 	enemigos[0]=orco1;
@@ -295,7 +295,7 @@ function validarCampoAlerta(input_id, alerta_id) {
 
 	
 	function Moneda(){
-		this.cantidad=10;
+		this.cantidad=25;
 		this.valor=1;
 		this.draw=dibujarMoneda;
 		this.draw2=dibujarMoneda2;
@@ -392,14 +392,16 @@ function validarCampoAlerta(input_id, alerta_id) {
 				if(playerX==objetos[ñ].posX & playerY==objetos[ñ].posY){
 					if(objetos[ñ].tipo=="key"){
 						door.valor=22;
+						$('#eventos').text("Puedes escapar por la puerta"); 		
 						drawPuerta();
 					}if(objetos[ñ].tipo=="moneda"){
 						scoreJugador=scoreJugador+objetos[ñ].cantidad;
+						$('#monedaCant').text(": "+scoreJugador);
+						$('#eventos').text("Cogiste 25 de oro"); 		
 						objetos[ñ].cantidad=0;
 					}
 					objetos[ñ].valor=0;
 				}
-			$('#noticias').text(d);
 		}
 	}
 	
@@ -772,12 +774,13 @@ function colision(){
 		var golpe=0;
 		var before=numberCh+ataqueJugador;
 		if(before > enemigos[par].defensa){
+			$('#eventos').text("La suma de los dados y tu ataque supero la defensa de tu enemigo"); 
 			golpe=dañoJugador;
 		}else{
+			$('#eventos').text("No podras atacar"); 
 			golpe=0;
 		}
 		enemigos[par].vida=enemigos[par].vida-golpe;
-		$("#noticias").text(getVidaE(par));
 		if(getVidaE(par)<=0){
 			$("#eVida").text("health: "+0);
 		}else{
@@ -791,8 +794,10 @@ function colision(){
 		var before=numberCh+enemigos[par].ataque;
 		if(before > defensaJugador){
 			golpe=enemigos[par].daño;
+			$('#eventos').text("Recibes "+golpe+" de daño"); 
 		}else{
 			golpe=0;
+			$('#eventos').text("No recibes daño"); 
 		}
 		vidaJugador=vidaJugador-golpe;
 		$("#jugadorVida").text("health: "+vidaJugador);
