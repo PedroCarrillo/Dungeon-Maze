@@ -17,7 +17,6 @@ input[type=text]{
 	margin-left:50px;
 }
 
-
 #imagenJuego{
 	width:35%;
 	height:100px;
@@ -27,24 +26,30 @@ input[type=text]{
 }
 
 
-#nickname{
-	border:solid white 1px;
-	
-}
 
 #boton{
 	margin-top:190px;
-	border:solid white 1px;
 	text-align:center;
 }
 
 #canvasDados{
-	 width:400px;
+	width:400px;
 	height:300px;
-	border:solid green 1px;
+	border:solid blue 1px;
 	background-color:white;
 }
 
+#mapa{
+	margin-right:350px;
+	display:none;
+	position: relative;
+	margin-left:150px;
+}
+
+ #canvasMapa{
+	border:solid white 1px;
+	position:relative;
+ }
 
 #clases{
 	margin-left:50px;
@@ -54,11 +59,10 @@ input[type=text]{
 }
 
 #imagenClase{
-	margin-top:30px;
-	margin-right:50px;
-	border:solid white 1px;
-	width:150px;
-	height:120px;
+	margin-top:60px;
+	margin-right:70px;
+	width:48px;
+	height:48px;
 	float:right;
 }
 
@@ -98,17 +102,6 @@ input[type=text]{
 	margin:10px;
 }
 
-#mapa{
-	margin-right: 350px;
-	display:none;
-	position: relative;
-	margin-left:150px;
-}
- #canvasMapa{
-	border:solid white 1px;
-	position:relative;
- }
- 
  .alerta 
 {
 	font-size:12px;
@@ -116,36 +109,26 @@ input[type=text]{
     display: none;
 }
 
+.guerreroImagen{
+	background-image:url('guerrero.png');
+	background-repeat:no-repeat;
+}
+
+.clerigoImagen{
+	background-image:url('clerigo.png');
+	background-repeat:no-repeat;
+}
+
+.valkiriaImagen{
+	background-image:url('valkiria.png');
+	background-repeat:no-repeat;
+}
+
 #inicioDatos{
 	margin-left:-30px;
 }
 
-#jugadorNick{
-	border:solid blue 1px;
-	height:20px;
-	width:130px;
-	margin:10px;
-}
-#jugadorVida{
-	border:solid blue 1px;
-	height:20px;
-	width:130px;
-	margin:10px;
-}
-#jugadorAtaque{
-	border:solid blue 1px;
-	height:20px;
-	width:130px;
-	margin:10px;
-}
-#jugadorDaño{
-	border:solid blue 1px;
-	height:20px;
-	width:130px;
-	margin:10px;
-}
-
-#jugadorDefensa{
+.datosJ{
 	border:solid blue 1px;
 	height:20px;
 	width:130px;
@@ -162,11 +145,40 @@ input[type=text]{
 	float:right;
 }
  
- #a{width:100px;height:50px; border:solid black 1px; float:right;}
- #noticias{width:200px;height:200px; border:solid black 1px; float:right;}
- #datosEnemigos{width:200px;height:200px; border:solid black 1px; float:right;}
- #zonaDados{ float:left; 
+
+ #noticias{ 
+	display:none;
+	width:200px;
+	height:200px;
+	border:solid yellow 4px;
+	float:right;
+	}
+	
+
+ #datosEnemigos{
+	width:150px;
+	height:170px; 
+	border:solid white 3px; 
+	float:right;
+	display:none;
+ 	text-align:center;
+	font-size:12px;
+ }
+ 
+
+.datosE{
+	border:solid red 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+
+
+ #zonaDados{ 
+ float:left; 
  display:none;
  }
 
+ 
  

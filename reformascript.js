@@ -9,7 +9,7 @@
 
 	
    $(document).ready(function(){
-		
+
 		var clase=$("input[name=clase]:checked").val();
 
 		$("#boton1").click(function() {
@@ -22,6 +22,7 @@
 		});
 
 		$("#guerrero_elegido").click(function(){
+			$("#imagenClase").removeClass();
 			ataqueJugador = 10;
 			defensaJugador = 14;
 			dañoJugador = 15;
@@ -31,9 +32,12 @@
 			$("#mDamage").text("Damage: "+dañoJugador);
 			$("#mHealth").text("Health: "+vidaJugador);
 			imgPlayer.src="guerrero.png";
+			$("#imagenClase").addClass("guerreroImagen");
+			
 		});
 
 		$("#clerigo_elegido").click(function(){
+			$("#imagenClase").removeClass();
 			ataqueJugador = 5;
 			defensaJugador = 16;
 			dañoJugador = 5;
@@ -43,10 +47,12 @@
 			$("#mDamage").text("Damage: "+dañoJugador);
 			$("#mHealth").text("Health: "+vidaJugador);
 			imgPlayer.src="clerigo.png";
+			$("#imagenClase").addClass("clerigoImagen");
 		});
 
 
 		$("#valkiria_elegido").click(function(){
+			$("#imagenClase").removeClass();
 			ataqueJugador = 10;
 			defensaJugador = 12;
 			dañoJugador = 20;
@@ -56,22 +62,27 @@
 			$("#mDamage").text("Damage: "+dañoJugador);
 			$("#mHealth").text("Health: "+vidaJugador);
 			imgPlayer.src="valkiria.png";
+			$("#imagenClase").addClass("valkiriaImagen");
 		});
 
 	
 		$("#lanzarDados").attr("disabled", "disabled");
 		$("#lanzarDados").click(function(){
 			var e=encontrarAtacante();
+			
 			ataqueJugadorT(e);
 			if(enemigos[e].vida <=0){
+				
 				borrarEnemigo(e);
 				var a="";
 				for(var i=0;i<enemigos.length;i++){
 					a=a+enemigos[i].vida;
+				colision();
 				}
 				alert(a);	
 				col=false;
 				$("#lanzarDados").attr("disabled", "disabled");
+				 setTimeout('borrarDatosEnemigos()',1000);
 			}else{
 				ataqueEnemigo(e);
 			}
@@ -86,6 +97,8 @@
 		$("#mapa").show("slow");
 		$("#zonaDados").fadeIn();
 		$("#tablero").show("slow");
+		$("#noticias").show("slow");
+		$("#imagenJuego").hide("fast");
 		mostrarDatos();
 }
 
@@ -96,7 +109,31 @@ function mostrarDatos(){
 	$('#jugadorDaño').text("Damage: "+dañoJugador);
 	$('#jugadorDefensa').text("Defense: "+defensaJugador);
 
+
 }
+
+function mostrarDatosEnemigos(f){
+	
+	$("#datosEnemigos").show("fast");
+	$("#eTipo").text(enemigos[f].tipo);
+	$("#eVida").text("health: "+getVidaE(f));
+	$("#eAtaque").text("Attack: "+ataqueJugador);
+	$('#eDaño').text("Damage: "+dañoJugador);
+	$('#eDefensa').text("Defense: "+defensaJugador);
+	
+}
+
+function borrarDatosEnemigos()
+{
+	$("#datosEnemigos").hide("fast");
+	$("#eTipo").text(" ");
+	$("#eVida").text(" ");
+	$("#eAtaque").text(" ");
+	$('#eDaño').text(" ");
+	$('#eDefensa').text(" ");
+
+}
+
 function validarCampo(input_id) {
 	if ($(input_id).val() == "" || $(input_id).val() == undefined) {
 	$(input_id).next().show();
@@ -469,6 +506,7 @@ function validarCampoAlerta(input_id, alerta_id) {
 	function movePlayer(){
 			$(document).keypress(function(e) {
 				$("#a").text(col);
+				
 				if(!col){
 					if (e.which == 115) {
 					//DOWN - S
@@ -513,13 +551,14 @@ function validarCampoAlerta(input_id, alerta_id) {
 					colision();
 					movimientoEnemigo();
 					colision();
-					$("#a").text(col);
 					cogerObjeto();
 					gane();
 					ctx.drawImage(imgPlayer,playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+					
 					if(col){
 						$("#lanzarDados").attr("disabled", false);
 					}
+					
 				}
 				
 			});
@@ -564,10 +603,14 @@ function colision(){
 	while(!col && jota<enemigos.length ){
 		if(getPosXE(jota) == playerX && getPosYE(jota) == playerY){
 			col=true;
+			$("#datosEnemigos").show("slow");
+			mostrarDatosEnemigos(jota);
 		}
 		jota++;
 		
-	}
+	}		
+
+	
 
 }
 
@@ -709,6 +752,7 @@ function colision(){
 				atacante=variable;
 			}
 		}
+
 		return atacante;
 	}
 	
@@ -734,6 +778,11 @@ function colision(){
 		}
 		enemigos[par].vida=enemigos[par].vida-golpe;
 		$("#noticias").text(getVidaE(par));
+		if(getVidaE(par)<=0){
+			$("#eVida").text("health: "+0);
+		}else{
+			$("#eVida").text("health: "+getVidaE(par));
+		}
 	}
 	
 	function ataqueEnemigo(par){
