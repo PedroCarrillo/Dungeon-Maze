@@ -378,7 +378,11 @@ function validarCampoAlerta(input_id, alerta_id) {
 			
 	function youwin(){
 		location.href="ganaste.html";
-	}	
+	}
+	
+	function youlose(){
+		location.href="gameover.html";
+	}
 				
 		
 	
@@ -808,9 +812,13 @@ function colision(){
 			golpe=0;
 			$('#eventos').text("No recibes daño"); 
 		}
+		
+		if((vidaJugador-golpe)<=0){
+			youlose();
+		}
 		vidaJugador=vidaJugador-golpe;
 		$("#jugadorVida").text("health: "+vidaJugador);
-
+		
 	}
 	
 	function dibujarPuerta(){
