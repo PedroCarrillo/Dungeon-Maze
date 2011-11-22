@@ -6,7 +6,9 @@
 	var scoreJugador=0;
 	var muerte=false;
 	var imgPlayer= new Image();
-
+	var level=1;
+	var level3=1;
+	var win=1;
 	
    $(document).ready(function(){
 
@@ -76,10 +78,10 @@
 				borrarEnemigo(e);
 				var a="";
 				for(var i=0;i<enemigos.length;i++){
-					a=a+enemigos[i].vida;
+				
 				colision();
 				}
-				alert(a);	
+					
 				col=false;
 				$("#lanzarDados").attr("disabled", "disabled");
 				 setTimeout('borrarDatosEnemigos()',1000);
@@ -348,13 +350,48 @@ function validarCampoAlerta(input_id, alerta_id) {
 	
 	function drawPuerta(){
 		if(door.valor>0){
-			ctx.drawImage(imgPuerta,480,0,2*radioP,2*radioP);
+			ctx.drawImage(imgPuerta,door.posX-radioP,door.posY-radioP,2*radioP,2*radioP);
 		}
 	}
 	function gane(){
-		if(playerX==500&playerY==20&door.valor!=0){
-			alert("Ganaste loco");
+		if(playerX==door.posX & playerY==door.posY & door.valor!=0){
+			level++;
+			if(level==2){
+				alert("Preparate para el 2do Nivel");
+				iniciar2nivel();
+				level3=2;
+			}else{
+				
+				
+				if(win==2){
+					youwin();
+				}else{
+					if(level3==2){
+						alert("Preparate para el 3er Nivel");
+						iniciar3nivel();
+						win=2;
+					}
+				}
+			}
 		}
+	}		
+			
+	function youwin(){
+		location.href="ganaste.html";
+	}	
+				
+		
+	
+	function reiniciarVariables(){
+		nkey=new key(980,380);
+		playerX=20;
+		playerY=20;
+	}
+	
+	function reiniciarVariables2(){
+		nkey=new key(980,20);
+		playerX=20;
+		playerY=380;
 	}
 	
 	var moneda1=new Moneda();
@@ -372,14 +409,14 @@ function validarCampoAlerta(input_id, alerta_id) {
 	function drawallstart(){
 		ctx.clearRect(0,0,mapWidth,mapHeight);
 		var m;
-		drawKey();
+		
 		for(m=0;m<enemigos.length;m++){
 			enemigos[m].draw();
 		}		
 		for(m=0;m<objetos.length;m++){
 			objetos[m].draw();
 		}
-		
+		drawKey();
 	}
 	
 	function cogerObjeto(){
@@ -407,7 +444,6 @@ function validarCampoAlerta(input_id, alerta_id) {
 	
 	function drawall(){
 		ctx.clearRect(0,0,mapWidth,mapHeight);
-		paredes_nivel_1();
 		drawKey();
 		drawPuerta();
 		var m;
@@ -429,7 +465,6 @@ function validarCampoAlerta(input_id, alerta_id) {
 		drawallstart();
 		movePlayer();
 		dibujaPlayer(0+radioP,380);
-		paredes_nivel_1();
 		
      }
 	
@@ -439,27 +474,6 @@ function validarCampoAlerta(input_id, alerta_id) {
 		playerX=x;
 		playerY=y;
 	}
-	
-	function paredes_nivel_1(){
-
-		/*	
-			ctx.drawImage(imgWall,180-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,220-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,260-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,300-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,340-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,380-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,420-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,460-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,500-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,540-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,580-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,620-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,660-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,700-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,740-radioP,220-radioP,2*radioP,2*radioP);
-			ctx.drawImage(imgWall,780-radioP,220-radioP,2*radioP,2*radioP);*/
-		}
 	
 	function compruebaPosicion(x,y){
 		if(x==playerX&y==playerY){
@@ -507,7 +521,6 @@ function validarCampoAlerta(input_id, alerta_id) {
 	
 	function movePlayer(){
 			$(document).keypress(function(e) {
-				$("#a").text(col);
 				
 				if(!col){
 					if (e.which == 115) {
@@ -528,8 +541,7 @@ function validarCampoAlerta(input_id, alerta_id) {
 					if (playerY < 20){ 
 						playerY = 20;
 					}
-					// alert(xEnemigo1,yEnemigo1);
-					//movimientoEnemigo1(xEnemigo1,yEnemigo1);
+
 
 					}
 					if (e.which == 100) {
@@ -539,9 +551,7 @@ function validarCampoAlerta(input_id, alerta_id) {
 					if (playerX > 980){
 						playerX = 980;
 					}
-					//alert(xEnemigo1,yEnemigo1)
 
-					//movimientoEnemigo1(xEnemigo1,yEnemigo1);
 					}
 					if (e.which == 97) {
 					ctx.clearRect(playerX-radioP,playerY-radioP,2*radioP,2*radioP);
@@ -562,7 +572,6 @@ function validarCampoAlerta(input_id, alerta_id) {
 					}
 					
 				}
-				
 			});
 	 }
 	 	function dibujarGoblin2(){
@@ -811,4 +820,64 @@ function colision(){
 	function abrirPuerta(){
 		alert("puerta");
 		ctx.drawImage(imgOrco,40-radioP,480-radioP,2*radioP,2*radioP);
+	}
+	
+	function iniciar2nivel(){
+		reiniciarVariables();
+		var goblin1=new Goblin();
+		var goblin2=new Goblin();
+
+		var orco1=new Orco();
+		var orco2=new Orco();
+		var moneda1=new Moneda();
+		var moneda2=new Moneda();
+		var moneda3=new Moneda();
+		var moneda4=new Moneda();
+		
+		enemigos[0]=orco1;
+		enemigos[1]=orco2;
+		enemigos[2]=goblin1;
+		enemigos[3]=goblin2;
+
+		
+		objetos[0]=nkey;
+		objetos[1]=moneda1;
+		objetos[2]=moneda2;
+		objetos[3]=moneda3;
+		objetos[4]=moneda4;
+		
+		door=new Puerta();
+		ctx.drawImage(imgPlayer,playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+		drawallstart();
+
+	}
+	function iniciar3nivel(){
+		reiniciarVariables2();
+	
+		var orco1=new Orco();
+		var orco2=new Orco();
+		var orco3=new Orco();
+		var orco4=new Orco();
+		var moneda1=new Moneda();
+		var moneda2=new Moneda();
+		var moneda3=new Moneda();
+		var moneda4=new Moneda();
+		
+		enemigos[0]=orco1;
+		enemigos[1]=orco2;
+		enemigos[2]=orco3;
+		enemigos[3]=orco4;
+	
+		
+		
+		objetos[0]=nkey;
+		objetos[1]=moneda1;
+		objetos[2]=moneda2;
+		objetos[3]=moneda3;
+		objetos[4]=moneda4;
+		
+		door=new Puerta();
+		ctx.drawImage(imgPlayer,playerX-radioP,playerY-radioP,2*radioP,2*radioP);
+		drawallstart();
+
 	}
