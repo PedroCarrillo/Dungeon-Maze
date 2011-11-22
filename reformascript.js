@@ -13,6 +13,10 @@
    $(document).ready(function(){
 
 		var clase=$("input[name=clase]:checked").val();
+		
+		$("#boton2").click(function(){
+			location.href="instrucciones.html";
+		});
 
 		$("#boton1").click(function() {
 
@@ -807,10 +811,10 @@ function colision(){
 		var before=numberCh+enemigos[par].ataque;
 		if(before > defensaJugador){
 			golpe=enemigos[par].daño;
-			$('#eventos').text("Recibes "+golpe+" de daño"); 
+			$('#eventosE').text("Recibes "+golpe+" de daño"); 
 		}else{
 			golpe=0;
-			$('#eventos').text("No recibes daño"); 
+			$('#eventosE').text("No recibes daño"); 
 		}
 		
 		if((vidaJugador-golpe)<=0){

@@ -6,7 +6,22 @@ body {
 	font-weight:bold;
     color:#fff;
 	}
+a{
+	margin-left:600px;
+	color:red;
+	text-align:center;
+}
 	
+a:hover{
+	color:green;
+}	
+
+
+h1{
+	margin-top:250px;
+	font-size:200px;
+	font:bold 200px Comic Sans MS sans serif;
+}	
 
 input[type=radio]{
 	margin:10px;
@@ -23,6 +38,8 @@ input[type=text]{
 	border:solid white 1px;
 	margin-left:520px;
 	margin-top:80px;
+	background-image:url('dungeon.jpg');
+	
 }
 
 
@@ -52,6 +69,7 @@ input[type=text]{
  }
 
 #clases{
+	margin-left:30px;
 	margin-left:50px;
 	margin-top:30px;
 	border:solid white 1px;
@@ -152,7 +170,7 @@ input[type=text]{
 	display:none;
 	width:200px;
 	height:200px;
-	border:solid yellow 4px;
+	border:solid yellow 1px;
 	margin-top:30px;
 	position:absolute;
 	top:0px;
@@ -189,15 +207,13 @@ input[type=text]{
  }
  
  #monedaCant{
-	border:solid green 1px;
 	height:50px;
 	width:50px;
-	margin-top:10px;
+	margin-top:20px;
 	float:left;
  }
  
  #monedaImg{
-	border:solid green 1px;
 	height:50px;
 	width:50px;
 	margin-top:10px;
@@ -209,11 +225,17 @@ input[type=text]{
  
  #eventos{
 	font-size:10px;
-	border:solid green 1px;
 	height:70px;
 	width:160px;
 	margin:10px;
 	margin-top:80px;
+ }
+  #eventosE{
+	font-size:10px;
+	height:70px;
+	width:160px;
+	margin:10px;
+	margin-top:10px;
  }
 
  
