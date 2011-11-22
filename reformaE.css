@@ -1,0 +1,220 @@
+body {
+	background:#000;
+	width:894px;
+	height:550px;
+	font-family:"Arial";
+	font-weight:bold;
+    color:#fff;
+	}
+	
+
+input[type=radio]{
+	margin:10px;
+}
+
+
+input[type=text]{
+	margin-left:50px;
+}
+
+#imagenJuego{
+	width:35%;
+	height:100px;
+	border:solid white 1px;
+	margin-left:520px;
+	margin-top:80px;
+}
+
+
+
+#boton{
+	margin-top:190px;
+	text-align:center;
+}
+
+#canvasDados{
+	width:350px;
+	height:200px;
+	border:solid blue 1px;
+	background-color:white;
+}
+
+#mapa{
+	margin-right:350px;
+	display:none;
+	position: relative;
+	margin-left:150px;
+}
+
+ #canvasMapa{
+	border:solid white 1px;
+	position:relative;
+ }
+
+#clases{
+	margin-left:50px;
+	margin-top:30px;
+	border:solid white 1px;
+	float:left;
+}
+
+#imagenClase{
+	margin-top:60px;
+	margin-right:70px;
+	width:48px;
+	height:48px;
+	float:right;
+}
+
+#datos{
+	margin-left:400px;
+	padding: 40px;
+	width:60%;
+	height:250px;
+	border:solid white 1px;
+}
+
+#personajeDatos{
+
+	float:left;
+	border:solid blue 1px;
+	width:110px;
+	height:120px;
+	font-size:12px;
+	margin-top:30px;
+	margin-left:50px;
+}
+
+#mAttack{
+	height:15px;
+	margin:10px;
+}
+#mDefense{
+	height:15px;
+	margin:10px;
+}
+#mHealth{
+	height:15px;
+	margin:10px;
+}
+#mDamage{
+	height:15px;
+	margin:10px;
+}
+
+ .alerta 
+{
+	font-size:12px;
+    color: red;
+    display: none;
+}
+
+.guerreroImagen{
+	background-image:url('guerrero.png');
+	background-repeat:no-repeat;
+}
+
+.clerigoImagen{
+	background-image:url('clerigo.png');
+	background-repeat:no-repeat;
+}
+
+.valkiriaImagen{
+	background-image:url('valkiria.png');
+	background-repeat:no-repeat;
+}
+
+#inicioDatos{
+	margin-left:-30px;
+}
+
+.datosJ{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+#tablero{
+	width:150px;
+	height:170px;
+	display:none;
+	border:solid white 1px;
+	text-align:center;
+	font-size:12px;
+	float:right;
+	 margin-top:40px;
+	 margin-left:50px;
+}
+ 
+
+ #noticias{ 
+	display:none;
+	width:200px;
+	height:200px;
+	border:solid yellow 4px;
+	margin-top:30px;
+	position:absolute;
+	top:0px;
+	left:1200px;
+	}
+	
+
+ #datosEnemigos{
+	width:150px;
+	height:170px; 
+	border:solid white 3px; 
+	float:right;
+	display:none;
+	 margin-top:40px;
+ 	text-align:center;
+	font-size:12px;
+ }
+ 
+
+.datosE{
+	border:solid red 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+
+
+ #zonaDados{ 
+	 margin-top:40px;
+	 float:left; 
+	 display:none;
+	 margin-left:60px;
+ }
+ 
+ #monedaCant{
+	border:solid green 1px;
+	height:50px;
+	width:50px;
+	margin-top:10px;
+	float:left;
+ }
+ 
+ #monedaImg{
+	border:solid green 1px;
+	height:50px;
+	width:50px;
+	margin-top:10px;
+	margin-left:20px;
+	float:left;
+	background-image:url('moneda.png');
+	background-repeat:no-repeat;
+ } 
+ 
+ #eventos{
+	font-size:10px;
+	border:solid green 1px;
+	height:70px;
+	width:160px;
+	margin:10px;
+	margin-top:80px;
+ }
+
+ 
+ 
