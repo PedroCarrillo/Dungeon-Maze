@@ -1,21 +1,172 @@
+body {
+	background:#000;
+	width:894px;
+	height:550px;
+	font-family:"Arial";
+	font-weight:bold;
+    color:#fff;
+	}
+	
+
+input[type=radio]{
+	margin:10px;
+}
+
+
+input[type=text]{
+	margin-left:50px;
+}
+
+
+#imagenJuego{
+	width:35%;
+	height:100px;
+	border:solid white 1px;
+	margin-left:520px;
+	margin-top:80px;
+}
+
+
+#nickname{
+	border:solid white 1px;
+	
+}
+
+#boton{
+	margin-top:190px;
+	border:solid white 1px;
+	text-align:center;
+}
+
 #canvasDados{
 	 width:400px;
 	height:300px;
 	border:solid green 1px;
+	background-color:white;
+}
+
+
+#clases{
+	margin-left:50px;
+	margin-top:30px;
+	border:solid white 1px;
+	float:left;
+}
+
+#imagenClase{
+	margin-top:30px;
+	margin-right:50px;
+	border:solid white 1px;
+	width:150px;
+	height:120px;
+	float:right;
+}
+
+#datos{
+	margin-left:400px;
+	padding: 40px;
+	width:60%;
+	height:250px;
+	border:solid white 1px;
+}
+
+#personajeDatos{
+
+	float:left;
+	border:solid blue 1px;
+	width:110px;
+	height:120px;
+	font-size:12px;
+	margin-top:30px;
+	margin-left:50px;
+}
+
+#mAttack{
+	height:15px;
+	margin:10px;
+}
+#mDefense{
+	height:15px;
+	margin:10px;
+}
+#mHealth{
+	height:15px;
+	margin:10px;
+}
+#mDamage{
+	height:15px;
+	margin:10px;
 }
 
 #mapa{
-	margin-right: 50px;
+	margin-right: 350px;
+	display:none;
+	position: relative;
+	margin-left:150px;
+}
+ #canvasMapa{
+	border:solid white 1px;
+	position:relative;
+ }
+ 
+ .alerta 
+{
+	font-size:12px;
+    color: red;
+    display: none;
 }
 
- #canvasMapa{
-	border:solid black 1px;
- }
+#inicioDatos{
+	margin-left:-30px;
+}
+
+#jugadorNick{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorVida{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorAtaque{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+#jugadorDaño{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+#jugadorDefensa{
+	border:solid blue 1px;
+	height:20px;
+	width:130px;
+	margin:10px;
+}
+
+#tablero{
+	width:150px;
+	height:170px;
+	display:none;
+	border:solid white 1px;
+	text-align:center;
+	font-size:12px;
+	float:right;
+}
  
  #a{width:100px;height:50px; border:solid black 1px; float:right;}
  #noticias{width:200px;height:200px; border:solid black 1px; float:right;}
  #datosEnemigos{width:200px;height:200px; border:solid black 1px; float:right;}
- #zonaDados{ float:left;
+ #zonaDados{ float:left; 
+ display:none;
  }
- 
+
  
